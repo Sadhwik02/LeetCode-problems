@@ -1,0 +1,19 @@
+class Solution:
+    def reverse(self, x: int) -> int:
+        rev_num=0
+        if x > 2 ** 31 - 1 or x < -2 ** 31:
+            return 0
+        if(x<0):
+            n = -1*x
+        else:
+            n = x
+        while(n>0):
+            digit = n%10
+            rev_num=rev_num*10+digit
+            n//=10
+        if rev_num > 2 ** 31 - 1 or rev_num < -2 ** 31:
+            return 0
+        if(x<0):
+            return rev_num*-1
+        return rev_num
+        
