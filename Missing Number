@@ -1,0 +1,7 @@
+def missingNumber(self, nums: List[int]) -> int:
+        n = len(nums)
+        sum = n * (n+1) // 2
+        sum_in_array = 0
+        for i in range(len(nums)):
+            sum_in_array += nums[i]
+        return sum - sum_in_array
