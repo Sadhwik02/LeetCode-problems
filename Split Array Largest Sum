@@ -1,0 +1,37 @@
+class Solution {
+    public int splitArray(int[] nums, int k) {
+        int max=nums[0];
+        int sum=0;
+        for(int i=0;i<nums.length;i++){
+            sum+=nums[i];
+            max = Math.max(max,nums[i]);
+        }
+        int low = max;
+        int high = sum;
+        while(low <= high){
+            int mid = low + ((high-low)/2);
+            int p = partitions(nums,mid);
+            if(p > k){
+                low = mid+1;
+            }
+            else{
+                high = mid-1;
+            }
+        }
+        return low;
+    }
+    public int partitions(int[] a,int mid){
+        int p = 1;
+        int sum = 0;
+        for(int i=0;i<a.length;i++){
+            if(sum+a[i] <= mid){
+                sum+=a[i];
+            }
+            else{
+                p++;
+                sum = a[i];
+            }
+        }
+        return p;
+    }
+}
