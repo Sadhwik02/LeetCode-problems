@@ -1,0 +1,41 @@
+class Solution {
+    public int minDays(int[] a, int m, int k) {
+        int min = Integer.MAX_VALUE;
+        int max = Integer.MIN_VALUE;
+        long val = (long) m*k;
+        if(val>a.length){
+            return -1;
+        }
+        for(int i=0;i<a.length;i++){
+            max = Math.max(max,a[i]);
+            min = Math.min(min,a[i]);
+        }
+        int low = min;
+        int high = max;
+        while(low <= high){
+            int mid = low + ((high - low)/2);
+            if(possible(a,mid,m,k)){
+                high = mid-1;
+            }
+            else{
+                low = mid+1;
+            }
+        }
+        return low;
+    }
+    public boolean possible(int[] a,int day,int m,int k){
+        int c = 0;
+        int nob = 0;
+        for(int i=0;i<a.length;i++){
+            if(a[i]<=day){
+                c+=1;
+            }
+            else{
+                nob+=c/k;
+                c=0;
+            }
+        }
+        nob+=c/k;
+        return nob>=m;
+    }
+}
